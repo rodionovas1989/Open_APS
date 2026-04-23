@@ -4,12 +4,10 @@ from fastapi.responses import FileResponse
 import os
 
 from src.database.connection import init_db, close_db
-
-# Импорт роутов (здесь будут подключены маршруты из папки routes)
-# from .routes import resources, orders, products
+from api.routes import materials
 
 app = FastAPI(
-    title="Open APS",
+    title="TALARIX APS X5",
     description="Advanced Planning and Scheduling System",
     version="1.0.0"
 )
@@ -32,17 +30,20 @@ async def root():
     web_path = os.path.join(os.path.dirname(__file__), "..", "web", "templates", "index.html")
     if os.path.exists(web_path):
         return FileResponse(web_path)
-    return {"message": "Welcome to Open APS API", "docs": "/docs"}
+    return {"message": "Welcome to TALARIX APS X5 API", "docs": "/docs"}
 
 # Подключение статических файлов (CSS, JS)
 web_static_path = os.path.join(os.path.dirname(__file__), "..", "web", "static")
 if os.path.exists(web_static_path):
     app.mount("/static", StaticFiles(directory=web_static_path), name="static")
 
+# Подключение роутов
+app.include_router(materials.router, prefix="/api")
+
 # Пример эндпоинта для проверки работоспособности
 @app.get("/api/health")
 async def health_check():
-    return {"status": "healthy", "service": "Open APS"}
+    return {"status": "healthy", "service": "TALARIX APS X5"}
 
 if __name__ == "__main__":
     import uvicorn
