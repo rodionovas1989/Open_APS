@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open APS - Система планирования</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Open APS</h1>
+            <p class="subtitle">Advanced Planning and Scheduling System</p>
+        </header>
+
+        <main>
+            <section class="status">
+                <h2>Статус системы</h2>
+                <div id="health-status" class="status-card">
+                    <span class="loading">Загрузка...</span>
+                </div>
+            </section>
+
+            <section class="features">
+                <h2>Возможности системы</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>📊 Планирование</h3>
+                        <p>Автоматическое планирование производства с учетом ограничений</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🏭 Ресурсы</h3>
+                        <p>Управление производственными ресурсами и мощностями</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📦 Продукты</h3>
+                        <p>Каталог продукции и спецификации</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📋 Заказы</h3>
+                        <p>Управление заказами клиентов и поставщиков</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="api-links">
+                <h2>Документация API</h2>
+                <div class="links">
+                    <a href="/docs" target="_blank" class="btn">Swagger UI</a>
+                    <a href="/redoc" target="_blank" class="btn">ReDoc</a>
+                    <a href="/api/health" target="_blank" class="btn">Health Check</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Open APS. Версия 1.0.0</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

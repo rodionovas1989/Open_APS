@@ -3,7 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import os
 
-from src.database import init_db
+from src.database.connection import init_db, close_db
 
 # Импорт роутов (здесь будут подключены маршруты из папки routes)
 # from .routes import resources, orders, products
@@ -18,12 +18,18 @@ app = FastAPI(
 async def startup_event():
     """Инициализация базы данных при запуске"""
     print("Initializing database...")
-    # init_db.create_tables()  # Раскомментировать, если нужно авто-создание таблиц
+    await init_db()
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Закрытие подключения к БД при остановке"""
+    print("Closing database connections...")
+    await close_db()
 
 @app.get("/")
 async def root():
-    """Главная страница - перенаправление на веб-интерфейс"""
-    web_path = os.path.join(os.path.dirname(__file__), "..", "web", "index.html")
+    """Главная страница - веб-интерфейс"""
+    web_path = os.path.join(os.path.dirname(__file__), "..", "web", "templates", "index.html")
     if os.path.exists(web_path):
         return FileResponse(web_path)
     return {"message": "Welcome to Open APS API", "docs": "/docs"}
