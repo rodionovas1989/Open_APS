@@ -452,3 +452,19 @@ class PlannedOperation(Base, TimestampMixin):
         Index("idx_planned_ops_plan", "plan_id"),
         Index("idx_planned_ops_schedule", "scheduled_start", "scheduled_end"),
     )
+
+class Material(Base, TimestampMixin):
+    '''Справочник материалов'''
+    __tablename__ = "materials"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(255), nullable=False, index=True)
+    article = Column(String(100), unique=True, nullable=False, index=True)
+    counterparty = Column(String(255), nullable=True)
+    accounting_model = Column(String(100), nullable=True)
+    shelf_life = Column(Integer, nullable=True)  # Срок хранения в днях
+
+    __table_args__ = (
+        Index("idx_materials_name", "name"),
+        Index("idx_materials_article", "article"),
+    )
